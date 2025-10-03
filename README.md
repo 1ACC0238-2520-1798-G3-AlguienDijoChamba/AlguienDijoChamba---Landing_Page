@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔧 AlguienDijoChamba - Landing Page
 
-## Getting Started
+**Servicios técnicos y de mantenimiento al instante**
 
-First, run the development server:
+Una landing page moderna y responsive para conectar usuarios con profesionales técnicos confiables en plomería, electricidad, pintura, carpintería y más.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Características
+
+- **🎨 Diseño Moderno**: Interfaz limpia y profesional con gradientes y animaciones suaves
+- **📱 Completamente Responsive**: Optimizada para desktop, tablet y móvil
+- **⚡ Header Fijo**: Navegación siempre accesible con menú hamburguesa en móviles
+- **🎯 Secciones Principales**:
+  - **Inicio**: Hero section con call-to-action
+  - **Producto**: Expertos en reparaciones del hogar
+  - **Servicio**: Catálogo de servicios técnicos
+  - **Testimonio**: Reseñas de usuarios satisfechos
+  - **Contáctanos**: Formulario de contacto con redes sociales
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Framework**: Next.js 15.5.4 con React 19
+- **Estilos**: Tailwind CSS v4 con configuración personalizada
+- **Lenguaje**: TypeScript
+- **Íconos**: Emojis nativos para mejor compatibilidad
+- **Optimización**: Next.js Image component para imágenes optimizadas
+
+## 🎨 Paleta de Colores
+
+```css
+--primary: #29405A    /* Azul oscuro principal */
+--secondary: #2247C0  /* Azul intermedio */
+--accent: #3E72AD     /* Azul claro */
+--teal: #42CACA       /* Verde azulado */
+--yellow: #FFD900     /* Amarillo destacado */
+--gray: #D9D9D9       /* Gris claro */
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Instalación y Desarrollo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisitos
+- Node.js 18.0 o superior
+- npm, yarn, pnpm o bun
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Instalación
 
-## Learn More
+```bash
+# Clonar el repositorio
+git clone [URL_DEL_REPOSITORIO]
 
-To learn more about Next.js, take a look at the following resources:
+# Instalar dependencias
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Ejecutar en modo desarrollo
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Desarrollado con ❤️ para conectar usuarios con los mejores profesionales técnicos**
