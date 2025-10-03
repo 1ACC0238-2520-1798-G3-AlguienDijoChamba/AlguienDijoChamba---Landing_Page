@@ -54,7 +54,7 @@ export default function Testimonials() {
               
               {/* Quote */}
               <p className="text-lg text-[#29405A] mb-6 leading-relaxed italic">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </p>
               
               {/* Rating */}

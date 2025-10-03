@@ -38,7 +38,7 @@ export default function Contact() {
             <span className="text-6xl">💡</span>
           </div>
           <p className="text-lg text-[#2247C0] max-w-2xl mx-auto">
-            There's Nothing We Like More Than Rolling Up Our Sleeves And Starting A Brand New Project. Let's Make Something Great Together.
+            There&apos;s Nothing We Like More Than Rolling Up Our Sleeves And Starting A Brand New Project. Let&apos;s Make Something Great Together.
           </p>
         </div>
 
