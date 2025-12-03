@@ -1,9 +1,22 @@
 "use client";
 
 import { GOOGLE_PLAY_URL } from "../config/links";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function Gamification() {
+  const [visible, setVisible] = useState(false);
+
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && setVisible(true)),
+        { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+  }, []);
+
   const levels = [
     {
       name: "bronce",
@@ -42,6 +55,7 @@ export default function Gamification() {
 
   return (
       <section
+          ref={sectionRef}
           id="niveles"
           className="py-20"
           style={{ backgroundColor: "#29405A" }}
@@ -63,13 +77,16 @@ export default function Gamification() {
             {levels.map((level, index) => (
                 <div
                     key={index}
-                    className="
-                bg-white rounded-2xl p-8 border-4 shadow-2xl flex flex-col
-                transition-all duration-300 transform cursor-pointer
-                hover:-translate-y-3 hover:scale-[1.02]
-              "
+                    className={`
+                      bg-white rounded-2xl p-8 border-4 shadow-2xl flex flex-col
+                      transition-all duration-300 transform cursor-pointer
+                      hover:-translate-y-3 hover:scale-[1.02]
+                      ${visible ? "animate-slide-in-left-2" : "opacity-0 -translate-x-10"}
+                    `}
                     style={{ borderColor: level.color }}
                 >
+
+
                   <div className="text-center mb-8">
                     <div
                         className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden shadow-xl"
@@ -141,17 +158,21 @@ export default function Gamification() {
 
           {/* Cómo subir de nivel */}
           <div
-              className="text-center mt-16 rounded-2xl p-8 shadow-lg border border-[#42CACA]"
+              className={`
+              text-center mt-16 rounded-2xl p-8 shadow-lg border border-[#42CACA]
+              transition-all duration-700
+              ${visible ? "animate-slide-in-left-4 opacity-100" : "opacity-0 translate-x-10"}
+            `}
               style={{ backgroundColor: "#42CACA" }}
           >
             <h3 className="text-2xl md:text-3xl font-bold mb-6 text-[#FFD900]">
               ¿Cómo subir de nivel?
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 ">
               <div className="text-center p-4">
                 <div className="text-3xl mb-2">🔧</div>
-                <h4 className="font-bold text-lg mb-2 text-[#FFD900]">
+                <h4 className="font-bold text-lg mb-2 text-[#ffffff]">
                   Contrata Servicios
                 </h4>
                 <p className="text-[#ffffff]">
@@ -161,7 +182,7 @@ export default function Gamification() {
 
               <div className="text-center p-4">
                 <div className="text-3xl mb-2">⭐</div>
-                <h4 className="font-bold text-lg mb-2 text-[#FFD900]">
+                <h4 className="font-bold text-lg mb-2 text-[#ffffff]">
                   Califica Técnicos
                 </h4>
                 <p className="text-[#ffffff]">
@@ -171,7 +192,7 @@ export default function Gamification() {
 
               <div className="text-center p-4">
                 <div className="text-3xl mb-2">👥</div>
-                <h4 className="font-bold text-lg mb-2 text-[#FFD900]">
+                <h4 className="font-bold text-lg mb-2 text-[#ffffff]">
                   Recomienda Amigos
                 </h4>
                 <p className="text-[#ffffff]">

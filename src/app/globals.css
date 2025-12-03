@@ -178,3 +178,32 @@ html {
 .animate-slide-in-left {
   animation: slide-in-left 1s ease forwards;
 }
+
+@keyframes slide-in-left-2 {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.animate-slide-in-left-2 {
+  animation: slide-in-left-2 4s ease forwards;
+}
+
+@keyframes slide-in-left-3 {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in-left-3 {
+  animation: slide-in-left-3 4s ease forwards;
+}
+
+@keyframes slide-in-left-4 {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in-left-4 {
+  animation: slide-in-left-4 4s ease forwards;
+}
+
+.will-change-transform {
+  will-change: transform, opacity;
+}

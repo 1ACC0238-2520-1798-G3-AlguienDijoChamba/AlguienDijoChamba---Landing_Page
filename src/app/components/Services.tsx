@@ -1,4 +1,21 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+
 export default function Services() {
+  const [visible, setVisible] = useState(false);
+
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && setVisible(true)),
+        { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+  }, []);
+
   const services = [
     {
       name: 'Electricidad',
@@ -33,7 +50,7 @@ export default function Services() {
   ]
 
   return (
-    <section id="servicios" className="py-20 bg-white relative overflow-hidden">
+    <section ref={sectionRef} id="servicios" className="py-20 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16 animate-fade-in-up">
           <div className="flex items-center justify-center mb-6">
@@ -54,13 +71,22 @@ export default function Services() {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-moveCards">
           {services.map((service, index) => (
-            <div 
-              key={index}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up"
-              style={{animationDelay: `${index * 0.1}s`}}
-            >
+              <div
+                  key={index}
+                  className={`
+                      group relative bg-white rounded-2xl overflow-hidden shadow-lg
+                      hover:shadow-2xl hover:scale-105 transition-transform duration-300
+                      cursor-pointer
+                      ${visible
+                      ? "animate-fade-in-up animate-slide-in-left-3"
+                      : "opacity-0 translate-x-10"
+                  }
+`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+
+              >
               {/* Service Image */}
               <div className="h-48 bg-gradient-to-br from-[#42CACA] to-[#3E72AD] flex items-center justify-center">
                 {service.image.startsWith('http') ? (
