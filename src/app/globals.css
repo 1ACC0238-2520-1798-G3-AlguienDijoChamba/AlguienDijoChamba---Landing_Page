@@ -149,3 +149,23 @@ html {
 .card-hover:hover {
   transform: translateY(-5px);
 }
+
+@keyframes moveText {
+  0% { transform: translateX(-50px); }
+  50% { transform: translateX(-40px); }
+  100% { transform: translateX(-50px); }
+}
+
+.animate-moveText {
+  animation: moveText 4s ease-in-out 0.5s infinite; /* 0.5s delay para dejar que aparezca */
+}
+
+@keyframes moveCards {
+  0% { transform: translateX(20px); }
+  50% { transform: translateX(30px); }
+  100% { transform: translateX(20px); }
+}
+
+.animate-moveCards {
+  animation: moveCards 4s ease-in-out 0.5s infinite;
+}

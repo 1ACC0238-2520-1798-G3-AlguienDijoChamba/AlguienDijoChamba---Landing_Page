@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
-      <div className="pt-20">
+      <div className="pt-0">
         <Hero />
         <Experts />
         <Stats />

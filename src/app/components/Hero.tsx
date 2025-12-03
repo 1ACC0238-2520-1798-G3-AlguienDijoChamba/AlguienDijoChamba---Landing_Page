@@ -1,75 +1,245 @@
-import Image from 'next/image'
+"use client";
+
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  /* -------------------------------------------------------------- */
+  /* CONFIGURACIÓN GENERAL */
+  /* -------------------------------------------------------------- */
+
+  const USER_SECTIONS = [0, 2, 1];
+  const TEC_SECTIONS = [3, 5, 4];
+
+  const TOTAL_SECTIONS = 6;
+  const DURATION = 5000;
+
+
+  const [section, setSection] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [mode, setMode] = useState("user");
+
+  /* -------------------------------------------------------------- */
+  /* AUTO PLAY + PROGRESO */
+  /* -------------------------------------------------------------- */
+  useEffect(() => {
+    setProgress(0);
+
+    const timer = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
+          nextSection();
+          return 0;
+        }
+        return p + 1.5;
+      });
+    }, DURATION / 70);
+
+    return () => clearInterval(timer);
+  }, [section, mode]);
+
+
+
+  /* -------------------------------------------------------------- */
+  /* CAMBIO AUTOMÁTICO ENTRE SECCIONES */
+  /* -------------------------------------------------------------- */
+  const nextSection = () => {
+    setSection((prev) => {
+      if (mode === "user") {
+        if (prev < 0 || prev > 2) return 0;
+        return prev >= 2 ? 0 : prev + 1;
+      } else {
+        if (prev < 3 || prev > 5) return 3;
+        return prev >= 5 ? 3 : prev + 1;
+      }
+    });
+  };
+
+
+
+  const gotoSection = (target: number) => {
+    setSection(target);
+    setProgress(0);
+  };
+
+  /* -------------------------------------------------------------- */
+  /* DATOS */
+  /* -------------------------------------------------------------- */
+  const SECTIONS = [
+    // USER
+    {
+      bg: "/img/fondo_hero/Fondo1.jpg",
+      title: "Servicios técnicos y de mantenimiento al instante",
+      subtitle: "¿Problemas en casa? Encuentra expertos aquí",
+      button: "¡Contrata ya!",
+      align: "right",
+    },
+    {
+      bg: "/img/fondo_hero/Fondo2.jpg",
+      title: "Tu técnico de confianza, en minutos.",
+      subtitle:
+          "Conecta con profesionales verificados listos para ayudarte.",
+      button: "Contratar ya",
+      align: "right",
+    },
+    {
+      bg: "/img/fondo_hero/Fondo3.jpg",
+      title: "La manera moderna de pedir ayuda en casa.",
+      subtitle:
+          "Sin llamadas, sin complicaciones.",
+      button: "Conocer la app",
+      align: "left",
+    },
+
+    // TECNICOS
+    {
+      bg: "/img/fondo_hero/Fondo7.jpg",
+      title: "Cuando lo necesitas, alguien dijo chamba.",
+      subtitle:
+          "Encuentra clientes reales todos los días.",
+      button: "Ofrecer mis servicios",
+      align: "right",
+    },
+    {
+      bg: "/img/fondo_hero/Fondo5.jpg",
+      title: "Que tu esfuerzo sea recompensado",
+      subtitle:
+          "Establece tus tarifas y recibe pagos sin retrasos.",
+      button: "Regístrate ya",
+      align: "right",
+    },
+    {
+      bg: "/img/fondo_hero/Fondo6.jpg",
+      title: "Tu trabajo, más visible que nunca.",
+      subtitle:
+          "Publica tu especialidad y conecta con clientes reales.",
+      button: "Comenzar ahora",
+      align: "split",
+    },
+  ];
+
+  const current = SECTIONS[section];
+
+  const dots = mode === "user" ? USER_SECTIONS : TEC_SECTIONS;
+
+  /* -------------------------------------------------------------- */
+  /* RENDER */
+  /* -------------------------------------------------------------- */
   return (
-    <section id="inicio" className="min-h-screen bg-gradient-to-br from-[#29405A] to-[#2247C0] text-white relative overflow-hidden flex items-center">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#42CACA] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#FFD900] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style={{animationDelay: '2s'}}></div>
-      </div>
+      <section
+          className="relative min-h-screen w-full bg-cover bg-center flex items-center"
+          style={{ backgroundImage: `url('${current.bg}')` }}
+      >
+        {/* -------------------------------------------------------------- */}
+        {/* BOTONES PARA CAMBIAR MODO (USER / TECNICO) */}
+        {/* -------------------------------------------------------------- */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 flex gap-4 z-50">
+          <button
+              onClick={() => {
+                setMode("user");
+                setSection(0);
+              }}
+              className={`
+                px-4 py-2 rounded-xl backdrop-blur-md 
+                transition-all duration-200 cursor-pointer
+                ${mode === "user" ? "bg-white/40" : "bg-black/30"}
+                text-white hover:text-yellow-300 text-outline 
+              `}
+          >
+            Usuario
+          </button>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-          {/* Left side - Content */}
-          <div className="animate-fade-in-up">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Servicios técnicos y de mantenimiento{' '}
-              <span className="text-[#FFD900]">al instante</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl mb-8 leading-relaxed text-gray-200">
-              ¿Problemas en casa? Encuentra expertos en plomería, electricidad, pintura, carpintería y más, listos para ayudarte en minutos. En AlguienDijoChamba conectamos tu necesidad con el profesional ideal, fácil y seguro.
-            </p>
+          <button
+              onClick={() => {
+                setMode("tecnico");
+                setSection(3);
+              }}
+              className={` px-4 py-2 rounded-xl backdrop-blur-md transition-all duration-200 cursor-pointer ${mode === "tecnico" ? "bg-white/40" : "bg-black/30"} text-white hover:text-yellow-300 text-outline `}
+          >
+            Técnico
+          </button>
 
-            {/* Features */}
-            <div className="space-y-4 mb-8">
-              {[
-                { icon: '🔧', text: 'Técnicos verificados.' },
-                { icon: '⚡', text: 'Atención rápida.' },
-                { icon: '📍', text: 'Cerca de ti.' }
-              ].map((feature, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center gap-3 animate-fade-in-up"
-                  style={{animationDelay: `${index * 0.2}s`}}
-                >
-                  <span className="text-2xl">{feature.icon}</span>
-                  <span className="font-semibold text-lg">{feature.text}</span>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-lg mb-8 text-gray-300">
-              Solo dinos qué necesitas, y nosotros nos encargamos del resto. Tu relajate en casa.
-            </p>
-
-          </div>
-
-          {/* Right side - Professional image */}
-            <div className="animate-fade-in-up flex justify-center" style={{animationDelay: '0.3s'}}>
-            <div className="relative">
-              <div className="w-80 h-96 bg-gradient-to-br from-[#42CACA] to-[#3E72AD] rounded-2xl flex items-center justify-center shadow-2xl overflow-hidden">
-              <Image 
-                src="/img/tecnico_portada.jpg" 
-                alt="Técnico profesional de AlguienDijoChamba" 
-                width={320}
-                height={384}
-                className="w-full h-full object-cover rounded-2xl"
-                priority
-              />
-              </div>
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#FFD900] rounded-full flex items-center justify-center text-2xl animate-bounce">
-              ⚡
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#42CACA] rounded-full flex items-center justify-center text-3xl animate-float">
-              🔧
-              </div>
-            </div>
-            </div>
         </div>
-      </div>
-    </section>
-  )
+
+
+
+        {/* -------------------------------------------------------------- */}
+        {/* TEXTOS */}
+        {/* -------------------------------------------------------------- */}
+        {current.align === "split" ? (
+            <div
+                className="relative z-10 flex justify-between items-start w-full px-30 gap-10"
+                style={{ marginTop: "40px" }}
+            >
+              {/* CARD DERECHA — TÍTULO */}
+              <div className="bg-black/40 p-6 rounded-xl shadow-lg w-[30%] text-right text-white" >
+                <h1 className="text-6xl font-bold">{current.title}</h1>
+              </div>
+
+              {/* CARD IZQUIERDA — SUBTÍTULO + BOTÓN */}
+              <div className="bg-black/40 p-6 rounded-xl shadow-lg w-[20%] text-white">
+                <p style={{ fontSize: "25px" }} className="mb-6">
+                  {current.subtitle}
+                </p>
+                <button
+                    className="px-6 py-3 bg-[#FFD900] text-black font-bold rounded-lg shadow-md cursor-pointer"
+                    onClick={() => window.open("https://play.google.com/store/apps", "_blank")}
+                >
+                  {current.button}
+                </button>
+              </div>
+
+
+
+            </div>
+        ) : (
+            /* MODO NORMAL: 1 CARD */
+            <div
+                className={`
+                  relative z-10 max-w-2xl 
+                  p-8 rounded-2xl backdrop-blur-sm bg-black/30 text-white shadow-xl
+                  ${current.align === "right" ? "ml-auto mr-20" : ""}
+                  ${current.align === "left" ? "ml-20" : ""}
+                `}
+                style={{ marginTop: "40px" }}
+            >
+              <h1 className="text-6xl font-extrabold mb-4">{current.title}</h1>
+              <p style={{ fontSize: "25px" }} className="mb-6">
+                {current.subtitle}
+              </p>
+              <button
+                  className="px-6 py-3 bg-[#FFD900] text-black font-bold rounded-lg shadow-md cursor-pointer"
+                  onClick={() => window.open("https://play.google.com/store/apps", "_blank")}
+              >
+                {current.button}
+              </button>
+            </div>
+        )}
+
+        {/* -------------------------------------------------------------- */}
+        {/* BOLITAS CON CLICK Y PROGRESO */}
+        {/* -------------------------------------------------------------- */}
+        <div className="absolute bottom-10 w-full flex justify-center gap-4 z-40">
+          {dots.map((i) => {
+            const isActive = i === section;
+
+            return (
+                <div
+                    key={i}
+                    onClick={() => gotoSection(i)}
+                    className="relative w-5 h-5 rounded-full bg-white/40 cursor-pointer overflow-hidden"
+                >
+                  {/* progreso */}
+                  <div
+                      className="absolute left-0 top-0 h-full bg-white pointer-events-none"
+                      style={{
+                        width: isActive ? `${progress}%` : "0%",
+                        transition: "width 0.1s linear",
+                      }}
+                  />
+                </div>
+            );
+          })}
+        </div>
+      </section>
+  );
 }
