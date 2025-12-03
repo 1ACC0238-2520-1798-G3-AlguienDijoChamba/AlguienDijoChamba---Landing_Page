@@ -54,7 +54,7 @@ export default function Experts() {
             {/* Texto */}
             <div
                 className={`transition-all duration-[2000ms] ease-in-out ${
-                    visible ? "-translate-x-50 opacity-100 animate-moveText" : "-translate-x-500 opacity-0"
+                    visible ? "-translate-x-10 opacity-100 animate-moveText" : "-translate-x-500 opacity-0"
                 }`}
                 style={{ animationPlayState: visible ? "running" : "paused" }}
             >
