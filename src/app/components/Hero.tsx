@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { GOOGLE_PLAY_URL } from "../config/links";
 
 export default function Hero() {
   /* -------------------------------------------------------------- */
@@ -10,10 +11,7 @@ export default function Hero() {
   const USER_SECTIONS = [0, 2, 1];
   const TEC_SECTIONS = [3, 5, 4];
 
-  const TOTAL_SECTIONS = 6;
   const DURATION = 5000;
-
-
   const [section, setSection] = useState(0);
   const [progress, setProgress] = useState(0);
   const [mode, setMode] = useState("user");
@@ -37,8 +35,6 @@ export default function Hero() {
     return () => clearInterval(timer);
   }, [section, mode]);
 
-
-
   /* -------------------------------------------------------------- */
   /* CAMBIO AUTOMÁTICO ENTRE SECCIONES */
   /* -------------------------------------------------------------- */
@@ -53,8 +49,6 @@ export default function Hero() {
       }
     });
   };
-
-
 
   const gotoSection = (target: number) => {
     setSection(target);
@@ -76,16 +70,14 @@ export default function Hero() {
     {
       bg: "/img/fondo_hero/Fondo2.jpg",
       title: "Tu técnico de confianza, en minutos.",
-      subtitle:
-          "Conecta con profesionales verificados listos para ayudarte.",
+      subtitle: "Conecta con profesionales verificados listos para ayudarte.",
       button: "Contratar ya",
       align: "right",
     },
     {
       bg: "/img/fondo_hero/Fondo3.jpg",
       title: "La manera moderna de pedir ayuda en casa.",
-      subtitle:
-          "Sin llamadas, sin complicaciones.",
+      subtitle: "Sin llamadas, sin complicaciones.",
       button: "Conocer la app",
       align: "left",
     },
@@ -94,31 +86,27 @@ export default function Hero() {
     {
       bg: "/img/fondo_hero/Fondo7.jpg",
       title: "Cuando lo necesitas, alguien dijo chamba.",
-      subtitle:
-          "Encuentra clientes reales todos los días.",
+      subtitle: "Encuentra clientes reales todos los días.",
       button: "Ofrecer mis servicios",
       align: "right",
     },
     {
       bg: "/img/fondo_hero/Fondo5.jpg",
       title: "Que tu esfuerzo sea recompensado",
-      subtitle:
-          "Establece tus tarifas y recibe pagos sin retrasos.",
+      subtitle: "Establece tus tarifas y recibe pagos sin retrasos.",
       button: "Regístrate ya",
       align: "right",
     },
     {
       bg: "/img/fondo_hero/Fondo6.jpg",
       title: "Tu trabajo, más visible que nunca.",
-      subtitle:
-          "Publica tu especialidad y conecta con clientes reales.",
+      subtitle: "Publica tu especialidad y conecta con clientes reales.",
       button: "Comenzar ahora",
       align: "split",
     },
   ];
 
   const current = SECTIONS[section];
-
   const dots = mode === "user" ? USER_SECTIONS : TEC_SECTIONS;
 
   /* -------------------------------------------------------------- */
@@ -130,7 +118,7 @@ export default function Hero() {
           style={{ backgroundImage: `url('${current.bg}')` }}
       >
         {/* -------------------------------------------------------------- */}
-        {/* BOTONES PARA CAMBIAR MODO (USER / TECNICO) */}
+        {/* SWITCH USER / TECNICOS */}
         {/* -------------------------------------------------------------- */}
         <div className="absolute top-20 left-1/2 -translate-x-1/2 flex gap-4 z-50">
           <button
@@ -139,11 +127,11 @@ export default function Hero() {
                 setSection(0);
               }}
               className={`
-                px-4 py-2 rounded-xl backdrop-blur-md 
-                transition-all duration-200 cursor-pointer
-                ${mode === "user" ? "bg-white/40" : "bg-black/30"}
-                text-white hover:text-yellow-300 text-outline 
-              `}
+            px-4 py-2 rounded-xl backdrop-blur-md 
+            transition-all duration-200 cursor-pointer
+            ${mode === "user" ? "bg-white/40" : "bg-black/30"}
+            text-white hover:text-yellow-300 text-outline
+          `}
           >
             Usuario
           </button>
@@ -153,62 +141,97 @@ export default function Hero() {
                 setMode("tecnico");
                 setSection(3);
               }}
-              className={` px-4 py-2 rounded-xl backdrop-blur-md transition-all duration-200 cursor-pointer ${mode === "tecnico" ? "bg-white/40" : "bg-black/30"} text-white hover:text-yellow-300 text-outline `}
+              className={`
+            px-4 py-2 rounded-xl backdrop-blur-md 
+            transition-all duration-200 cursor-pointer
+            ${mode === "tecnico" ? "bg-white/40" : "bg-black/30"}
+            text-white hover:text-yellow-300 text-outline
+          `}
           >
             Técnico
           </button>
-
         </div>
 
-
-
         {/* -------------------------------------------------------------- */}
-        {/* TEXTOS */}
+        {/* CONTENIDO SPLIT */}
         {/* -------------------------------------------------------------- */}
         {current.align === "split" ? (
             <div
                 className="relative z-10 flex justify-between items-start w-full px-30 gap-10"
                 style={{ marginTop: "40px" }}
             >
-              {/* CARD DERECHA — TÍTULO */}
-              <div className="bg-black/40 p-6 rounded-xl shadow-lg w-[30%] text-right text-white" >
+              {/* Título */}
+              <div className="bg-black/40 p-6 rounded-xl shadow-lg w-[30%] text-right text-white">
                 <h1 className="text-6xl font-bold">{current.title}</h1>
               </div>
 
-              {/* CARD IZQUIERDA — SUBTÍTULO + BOTÓN */}
+              {/* Subtítulo + Botón */}
               <div className="bg-black/40 p-6 rounded-xl shadow-lg w-[20%] text-white">
                 <p style={{ fontSize: "25px" }} className="mb-6">
                   {current.subtitle}
                 </p>
+
+                {/* BOTÓN ACTUALIZADO */}
                 <button
-                    className="px-6 py-3 bg-[#FFD900] text-black font-bold rounded-lg shadow-md cursor-pointer"
-                    onClick={() => window.open("https://play.google.com/store/apps", "_blank")}
+                    onClick={() => window.open(GOOGLE_PLAY_URL, "_blank")}
+                    className="
+                px-6 py-3 font-bold rounded-lg shadow-md cursor-pointer
+                transition-all duration-300 transform hover:scale-105
+              "
+                    style={{
+                      backgroundColor: "#FFD900",
+                      color: "#29405A",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#29405A";
+                      e.currentTarget.style.color = "#FFD900";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#FFD900";
+                      e.currentTarget.style.color = "#29405A";
+                    }}
                 >
                   {current.button}
                 </button>
               </div>
-
-
-
             </div>
         ) : (
-            /* MODO NORMAL: 1 CARD */
+            /* -------------------------------------------------------------- */
+            /* MODO NORMAL */
+            /* -------------------------------------------------------------- */
             <div
                 className={`
-                  relative z-10 max-w-2xl 
-                  p-8 rounded-2xl backdrop-blur-sm bg-black/30 text-white shadow-xl
-                  ${current.align === "right" ? "ml-auto mr-20" : ""}
-                  ${current.align === "left" ? "ml-20" : ""}
-                `}
+            relative z-10 max-w-2xl 
+            p-8 rounded-2xl backdrop-blur-sm bg-black/30 text-white shadow-xl
+            ${current.align === "right" ? "ml-auto mr-20" : ""}
+            ${current.align === "left" ? "ml-20" : ""}
+          `}
                 style={{ marginTop: "40px" }}
             >
               <h1 className="text-6xl font-extrabold mb-4">{current.title}</h1>
               <p style={{ fontSize: "25px" }} className="mb-6">
                 {current.subtitle}
               </p>
+
+              {/* BOTÓN ACTUALIZADO */}
               <button
-                  className="px-6 py-3 bg-[#FFD900] text-black font-bold rounded-lg shadow-md cursor-pointer"
-                  onClick={() => window.open("https://play.google.com/store/apps", "_blank")}
+                  onClick={() => window.open(GOOGLE_PLAY_URL, "_blank")}
+                  className="
+              px-6 py-3 font-bold rounded-lg shadow-md cursor-pointer
+              transition-all duration-300 transform hover:scale-105
+            "
+                  style={{
+                    backgroundColor: "#FFD900",
+                    color: "#29405A",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#42CACA";
+                    e.currentTarget.style.color = "#FFD900";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FFD900";
+                    e.currentTarget.style.color = "#29405A";
+                  }}
               >
                 {current.button}
               </button>
@@ -216,12 +239,11 @@ export default function Hero() {
         )}
 
         {/* -------------------------------------------------------------- */}
-        {/* BOLITAS CON CLICK Y PROGRESO */}
+        {/* DOTS DE NAVEGACIÓN */}
         {/* -------------------------------------------------------------- */}
         <div className="absolute bottom-10 w-full flex justify-center gap-4 z-40">
           {dots.map((i) => {
             const isActive = i === section;
-
             return (
                 <div
                     key={i}

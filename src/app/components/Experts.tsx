@@ -1,4 +1,6 @@
 "use client";
+import { GOOGLE_PLAY_URL } from "../config/links";
+
 import { useEffect, useRef, useState } from "react";
 
 export default function Experts() {
@@ -64,9 +66,35 @@ export default function Experts() {
               <p className="text-lg mb-8 text-white leading-relaxed">
                 ¿Tienes una fuga, necesitas pintar tu casa o instalar una campana extractora? En AlguienDijoChamba te conectamos con profesionales confiables en plomería, electricidad, pintura, carpintería y mucho más.
               </p>
-              <button className="bg-[#FFD900] hover:bg-yellow-400 text-[#29405A] text-lg px-8 py-4 rounded-xl font-bold shadow-lg transition-all duration-300 transform hover:scale-105">
+              <a
+                  href={GOOGLE_PLAY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#42CACA";
+                    e.currentTarget.style.color = "#FFD900";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FFD900";
+                    e.currentTarget.style.color = "#29405A";
+                  }}
+                  className="
+                    inline-block
+                    px-8 py-4
+                    rounded-xl font-bold text-lg
+                    transition-all duration-300 transform
+                    cursor-pointer shadow-lg
+                    hover:scale-105
+                  "
+                  style={{
+                    backgroundColor: "#FFD900",
+                    color: "#29405A",
+                  }}
+              >
                 VER MÁS
-              </button>
+              </a>
+
+
             </div>
 
             {/* RIGHT GRID */}
