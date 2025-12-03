@@ -187,7 +187,6 @@ export default function Contact() {
               duration-300
               hover:scale-[1.03]
               hover:-translate-y-2
-              animate-moveCards
             "
             >
               <h3 className="text-3xl font-bold mb-4 text-center">
